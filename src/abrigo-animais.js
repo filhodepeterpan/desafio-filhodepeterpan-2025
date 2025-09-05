@@ -42,6 +42,8 @@ class AbrigoAnimais {
 
     let adotados1 = 0;
     let adotados2 = 0;
+    let gatosAdotados1 = 0;
+    let gatosAdotados2 = 0;
     let lista = [];
 
     for (const nome of ordem) {
@@ -53,8 +55,14 @@ class AbrigoAnimais {
 
       let pessoa1PodeAdotar = false;
       let pessoa2PodeAdotar = false;
+      let tipoGato = false;
 
-      if (nome === "Loco") {
+      if (nome === "Mimi" || nome === "Fofo" || nome === "Zero") {
+        tipoGato = true;
+        pessoa1PodeAdotar = verificaOrdemBrinquedos(b1, brinquedos) && gatosAdotados1 < 1 ? true : false;
+        pessoa2PodeAdotar = verificaOrdemBrinquedos(b2, brinquedos) && gatosAdotados2 < 1 ? true : false;
+      }
+      else if (nome === "Loco") {
         pessoa1PodeAdotar = temTodosBrinquedos(b1, brinquedos) && adotados1 > 0 ? true : false;
         pessoa2PodeAdotar = temTodosBrinquedos(b2, brinquedos) && adotados2 > 0 ? true : false;
 
@@ -69,12 +77,14 @@ class AbrigoAnimais {
         destino = "abrigo";
       } 
       else if (pessoa1PodeAdotar && adotados1 < 3) { 
-        destino = "pessoa 1"; adotados1++; 
+        destino = "pessoa 1"; adotados1++;
+        if (tipoGato) {gatosAdotados1++;}
       }
       else if (pessoa2PodeAdotar && adotados2 < 3) { 
-        destino = "pessoa 2"; adotados2++; 
+        destino = "pessoa 2"; adotados2++;
+        if (tipoGato) {gatosAdotados2++;}
       }
-
+      
       lista.push(nome + " - " + destino);
     }
 

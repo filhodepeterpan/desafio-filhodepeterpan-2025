@@ -42,4 +42,18 @@ describe('Abrigo de Animais', () => {
     expect(resultado.erro).toBeFalsy();
   });
 
+  test('Não deve permitir que gatos dividam brinquedos', () => {
+    const resultado = new AbrigoAnimais().encontraPessoas(
+      'RATO,BOLA,LASER',
+      'SKATE,NOVELO',       
+      'Fofo,Mimi,Zero'       
+    );
+
+    expect(resultado.lista[0]).toBe('Fofo - abrigo');
+    expect(resultado.lista[1]).toBe('Mimi - pessoa 1');
+    expect(resultado.lista[2]).toBe('Zero - abrigo');
+    expect(resultado.lista.length).toBe(3);
+    expect(resultado.erro).toBeFalsy();
+  });
+
 });
